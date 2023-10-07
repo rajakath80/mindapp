@@ -1,0 +1,5 @@
+{
+  "name": "mindapp",
+  "displayName": "mindapp",
+  "plugins": ["@react-native-google-signin/google-signin"]
+}

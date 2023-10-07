@@ -1,0 +1,26 @@
+
+Error messages
+Text field validations
+Password change / reset flow
+
+Edit , Delete Goal
+
+1. Firebase push notifications
+2. Firebase dynamic links - email - pwd link
+
+Android:
+1. Android UI checks
+2. firebase react native lib setup - https://rnfirebase.io
+3. Android social auth
+
+
+watchman watch-del-all && rm -rf $TMPDIR/react-* &&
+ rm -rf node_modules/ && npm cache clean --force && npm install && 
+ cd ios && pod install --repo-update && cd .. && npm start -- --reset-cache
+
+
+DEEP LINKING:
+ https://jscrambler.com/blog/how-to-handle-deep-linking-in-a-react-native-app
+
+Firebase login auth flow :
+ https://github.com/itzpradip/react-native-firebase-social-app/blob/ad09dba33ed71ccd2effffe8573be46e8787d7b1/components/FormInput.js
