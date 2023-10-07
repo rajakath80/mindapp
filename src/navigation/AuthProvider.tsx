@@ -179,6 +179,37 @@ export const AuthProvider = ({children}) => {
             if (credentialState === appleAuth.State.AUTHORIZED) {
               // user is authenticated
               console.log('apple sign in successful');
+              const { identityToken, nonce } = appleAuthRequestResponse;
+              console.log('identityToken, nonce', identityToken, nonce);
+
+              const appleCredential = auth.AppleAuthProvider.credential(identityToken, nonce);
+
+              auth().signInWithCredential(appleCredential)
+              .then(response => {
+                const isNewUser = response.additionalUserInfo.isNewUser;
+                const {
+                  first_name,
+                  last_name,
+                  family_name,
+                  given_name,
+                } = response.additionalUserInfo.profile;
+                const { uid, email, phoneNumber, photoURL } = response.user
+                console.log('Apple user details: ', email, first_name, given_name, family_name);
+                console.log('is New User ', isNewUser);
+                if(isNewUser) {
+                  firestore().collection('users').doc(auth().currentUser.uid)
+                  .set({
+                      fname: '',
+                      lname: '',
+                      email: email,
+                      createdAt: firestore.Timestamp.fromDate(new Date()),
+                      userImg: null,
+                  })
+                  .catch(error => {
+                      console.log('Something went wrong with added user to firestore: ', error);
+                  })
+                }
+              })
             }
           } catch (e) {
             console.log(e);
